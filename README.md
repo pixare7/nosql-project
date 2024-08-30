@@ -8,87 +8,74 @@
    - [Methodology](#methodology)
 3. [Conclusions](#conclusions)
 4. [Future Work](#future-work)
+5. [References](#references)
 
 ## Overview
 
-The purpose of this project is to evaluate ratings data to aid food critics and journalists in the decision-making process for future articles for the magazine Eat Safe, Love.  This includes setting up a database, updating the database, and answering specific questions for Eat Safe, Love.  
+The goal of this project is to analyze restaurant ratings data to assist food critics and journalists in making informed decisions for future articles in the magazine *Eat Safe, Love*. This involves setting up a NoSQL database, updating the database, and answering specific queries relevant to the magazine's interests.
 
 ## Project Details
 
 ### Goals
-- Set up NoSQL database and jupyter notebook
-- Update the database
-- Answer specific questions for Eat Safe, Love using the database
+- Set up a NoSQL database and Jupyter notebook environment.
+- Update and maintain the database with the latest data.
+- Answer specific queries using the database to provide insights for *Eat Safe, Love*.
 
 ### Methodology
-Detail the approach and methods used to achieve the project's goals.
-
-In the "Methodology" section, you would typically describe the specific approaches, techniques, tools, and processes you used to accomplish the project's goals. Here are some examples of what you might include:
 
 1. **Data Collection:**
-   - Describe how you gathered the data for your project. This could involve web scraping, APIs, downloading datasets from public repositories, or collecting data manually.
-   - **Example:** "Weather data was collected using the OpenWeatherMap API for the years 2018-2022, covering various cities across the globe."
-
-   - A .json file containing the restaurant data was imported to create a database in MongoDB.  This included, but was not limited to, business name, address, contact information, rating, longitute/latitude, confidence in management and hygiene scores.  
+   - Data was retrieved using the UK Food Standards Agency's API and then saved as a JSON file, which was subsequently imported into a MongoDB database. The dataset includes information such as business name, address, contact details, ratings, longitude/latitude, and scores for management confidence and hygiene.
 
 2. **Data Cleaning:**
-   - Explain how you processed and cleaned the data to make it suitable for analysis. This could involve handling missing values, removing duplicates, or correcting data types.
-   - **Example:** "Data was cleaned using Pandas, with missing values imputed using the median for continuous variables and mode for categorical variables."
-   - a document for a restaurant was created and inserted into the collection
-   - the BusinessTypeID of a restaurant was updated
-   - documents with "Dover" as the LocalAuthorityName were deleted
-   - longitude and latitude were changed from string to decimal data types
-   - non 1-5 rating values were changed to Null and numerical 1-5 rating values were changed from strings to integers
+   - The data was cleaned using Pandas:
+     - A new document was created and inserted into the collection for a restaurant.
+     - The `BusinessTypeID` of a restaurant was updated.
+     - Documents with "Dover" as the `LocalAuthorityName` were deleted.
+     - Longitude and latitude fields were converted from strings to decimal data types.
+     - Ratings outside the 1-5 range were set to `null`, and valid 1-5 ratings were converted from strings to integers.
 
 3. **Exploratory Data Analysis (EDA):**
-   - Outline the steps you took to explore the data, including any visualizations, summary statistics, or correlation analyses.
-   - **Example:** "EDA was performed using Matplotlib and Seaborn to visualize the distribution of temperatures across different latitudes."
-   Queries were performed using Pandas to answer the following questions and create dataframes.  
-   - Which establishments have a hygiene score equal to 20? 
-   - Which establishments in London have a RatingVaue greater than or equal to 4. 
-   - What are the top 5 establishments with a RatingVlaue of 5, sorted by lowest hygiene score, nearest to the new restaurant added ("Penang Flavours")? 
-   - How many establishments in each Local Authority area have a hygiene score of 0? 
+   Queries were performed using Pandas to answer the following questions and create relevant dataframes:
+   - Which establishments have a hygiene score equal to 20?
+   - Which establishments in London have a `RatingValue` greater than or equal to 4?
+   - What are the top 5 establishments with a `RatingValue` of 5, sorted by lowest hygiene score, nearest to the newly added restaurant ("Penang Flavours")?
+   - How many establishments in each Local Authority area have a hygiene score of 0?
 
 4. **Tools and Libraries:**
-    - MongoClient from pymongo was used to create the database to store and manage the data. 
-    - Pandas was used for data manipulation and analysis
-    - pprint was used for testing and displaying query results
+    - `MongoClient` from the `pymongo` library was used to create and manage the database.
+    - Pandas was utilized for data manipulation and analysis.
+    - `pprint` was used for formatting and displaying query results.
 
-#### Figure 0: [Figure Title]
-![Figure 0](path/to/figure0.png)
+#### Figure 1: Establishments with a Hygiene Score of 20
+![Figure 1](https://github.com/pixare7/nosql-project/blob/main/images/fig1.png)
 
-*Brief description of Figure 0.*
+*This dataframe displays establishments with a hygiene score of 20.*
 
-#### Figure 1: [Figure Title]
-![Figure 1](path/to/figure1.png)
+#### Figure 2: London Establishments with a RatingValue ≥ 4
+![Figure 2](https://github.com/pixare7/nosql-project/blob/main/images/fig2.png)
 
-*Brief description of Figure 1.*
+*This dataframe shows establishments in London with a `RatingValue` greater than or equal to 4.*
 
-#### Figure 2: [Figure Title]
-![Figure 2](path/to/figure2.png)
+#### Figure 3: Top 5 Establishments Near "Penang Flavours" with a RatingValue of 5
+![Figure 3](https://github.com/pixare7/nosql-project/blob/main/images/fig3.png)
 
-*Brief description of Figure 2.*
+*This dataframe highlights the top 5 establishments with a `RatingValue` of 5, sorted by lowest hygiene score, nearest to the new restaurant "Penang Flavours".*
 
-#### Figure 3: [Figure Title]
-![Figure 3](path/to/figure3.png)
+#### Figure 4: Establishments with a Hygiene Score of 0 by Local Authority Area
+![Figure 4](https://github.com/pixare7/nosql-project/blob/main/images/fig4.png)
 
-*Brief description of Figure 3.*
-
-#### Figure 4: [Figure Title]
-![Figure 4](path/to/figure4.png)
-
-*Brief description of Figure 4.*
-
-#### Figure 5: [Figure Title]
-![Figure 5](path/to/figure5.png)
-
-*Brief description of Figure 5.*
+*This dataframe displays the number of establishments in each Local Authority area with a hygiene score of 0.*
 
 ## Conclusions
 
-Summarize the key findings or results of the project.
+This project provided key insights into restaurant hygiene and rating data, which can inform future content for *Eat Safe, Love*. Notably, it identified establishments with extreme hygiene scores and high ratings in specific areas, helping prioritize potential review targets. 
 
 ## Future Work
 
-Discuss any potential extensions, improvements, or follow-up projects that could build on the work done in this project.
+Future work will include additional data cleaning, such as removing unused columns and mapping IDs to more descriptive names, like converting `BusinessTypeID` to the actual business type name. Additionally, further analysis will explore relationships between variables to uncover deeper patterns, such as those seen in the queries regarding hygiene scores, rating values, and geographical distribution.
+
+## References
+
+[UK Food Standards Agency (2022)](https://www.food.gov.uk/)
+. UK food hygiene rating data API. [https://ratings.food.gov.uk/open-data/en-GB](https://ratings.food.gov.uk/open-data/en-GB). Contains public sector information licensed under the Open Government Licence v3.0. Accessed on Sept 9, 2022, and Sept 12, 2022, with the establishment settings as follows: longitude = 51.5072, latitude = -0.1276, maxdistancelimit = 4567, pagesize = 10000, sortoptionkey = distance, pagenumber = (1, 2, 3, 4, 5, 6, 7, 8).
 
